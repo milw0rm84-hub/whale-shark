@@ -50,6 +50,32 @@
             transform: translateX(0);
         }
 
+        /* Admin Panel Overlay */
+        #admin-panel {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+        #admin-panel.active { display: block; }
+        
+        .admin-tab { cursor: pointer; border-bottom: 2px solid transparent; padding-bottom: 8px; transition: all 0.3s; }
+        .admin-tab.active { border-bottom-color: var(--accent-gold); color: var(--accent-gold); }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
+            z-index: 2100;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+
         /* Timeline Repair */
         .timeline-container::before {
             content: '';
@@ -109,7 +135,7 @@
             text-align: center;
             padding: 16px;
             position: fixed;
-            z-index: 1000;
+            z-index: 3000;
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
@@ -165,19 +191,16 @@
         </div>
         <div class="relative z-10 text-center text-white px-6">
             <div class="overflow-hidden mb-4">
-                <span id="hero-tagline" class="block uppercase tracking-[0.5em] text-[10px] md:text-xs text-accent-gold">Exclusive August 2026 Departure</span>
+                <span id="hero-tagline" data-cms="heroTagline" class="block uppercase tracking-[0.5em] text-[10px] md:text-xs text-accent-gold">Exclusive August 2026 Departure</span>
             </div>
             <div class="overflow-hidden mb-8">
-                <h1 id="hero-title" class="text-4xl md:text-8xl leading-tight">Saleh Bay <br class="hidden md:block"> Encounter</h1>
+                <h1 id="hero-title" data-cms="heroTitle" class="text-4xl md:text-8xl leading-tight">Saleh Bay <br class="hidden md:block"> Encounter</h1>
             </div>
-            <p id="hero-desc" class="text-sm md:text-xl body-font italic max-w-2xl mx-auto mb-10 text-white/90">August 1st — 4th | Embark on a journey to swim with the ocean's gentle giants.</p>
+            <p id="hero-desc" data-cms="heroDesc" class="text-sm md:text-xl body-font italic max-w-2xl mx-auto mb-10 text-white/90">August 1st — 4th | Embark on a journey to swim with the ocean's gentle giants.</p>
             <div id="hero-btns" class="flex flex-col md:flex-row justify-center gap-4">
                 <a href="#itinerary" class="btn-reserve px-10 py-5 text-[10px] font-bold uppercase">The Journey</a>
                 <a href="#pricing" class="bg-white/10 backdrop-blur-md border border-white/20 px-10 py-5 text-[10px] font-bold uppercase hover:bg-white hover:text-black transition-all">Secure Spot</a>
             </div>
-        </div>
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
         </div>
     </section>
 
@@ -227,9 +250,6 @@
                 <div class="swiper-slide h-[400px] md:h-[600px]">
                     <img src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700" alt="Sumbawa Coast">
                 </div>
-                <div class="swiper-slide h-[400px] md:h-[600px]">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700" alt="Landscape">
-                </div>
             </div>
             <div class="swiper-pagination mt-12 !relative"></div>
         </div>
@@ -246,7 +266,6 @@
             <div class="relative timeline-container pb-12">
                 <div id="timeline-progress"></div>
                 
-                <!-- Day 01 -->
                 <div class="relative pl-16 md:pl-32 mb-24 timeline-item">
                     <div class="dot absolute left-0 top-0 w-10 h-10 md:w-20 md:h-20 bg-white border border-gray-100 flex items-center justify-center rounded-full z-10 shadow-sm transition-all duration-500">
                         <span class="font-bold text-accent-gold text-xs md:text-lg">01</span>
@@ -258,7 +277,6 @@
                     </div>
                 </div>
 
-                <!-- Day 02 -->
                 <div class="relative pl-16 md:pl-32 mb-24 timeline-item">
                     <div class="dot absolute left-0 top-0 w-10 h-10 md:w-20 md:h-20 bg-white border border-gray-100 flex items-center justify-center rounded-full z-10 shadow-sm transition-all duration-500">
                         <span class="font-bold text-accent-gold text-xs md:text-lg">02</span>
@@ -269,36 +287,12 @@
                         <p class="text-gray-500 body-font leading-relaxed text-sm md:text-lg">A 4:00 AM departure to reach the bagan platforms as the sun rises. Experience respectful, intimate swims with whale sharks. Return for a gourmet lunch and restorative spa afternoon.</p>
                     </div>
                 </div>
-
-                <!-- Day 03 -->
-                <div class="relative pl-16 md:pl-32 mb-24 timeline-item">
-                    <div class="dot absolute left-0 top-0 w-10 h-10 md:w-20 md:h-20 bg-white border border-gray-100 flex items-center justify-center rounded-full z-10 shadow-sm transition-all duration-500">
-                        <span class="font-bold text-accent-gold text-xs md:text-lg">03</span>
-                    </div>
-                    <div class="content reveal-right">
-                        <h4 class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-3 font-bold">Island Hopping</h4>
-                        <h3 class="text-2xl md:text-4xl mb-4 italic leading-tight">Moyo & Mata Jitu</h3>
-                        <p class="text-gray-500 body-font leading-relaxed text-sm md:text-lg">Cruising to Moyo Island. A jungle trek leads to the famous Mata Jitu waterfalls, followed by snorkeling in the pristine coral gardens of Takat Sagele.</p>
-                    </div>
-                </div>
-
-                <!-- Day 04 -->
-                <div class="relative pl-16 md:pl-32 timeline-item">
-                    <div class="dot absolute left-0 top-0 w-10 h-10 md:w-20 md:h-20 bg-white border border-gray-100 flex items-center justify-center rounded-full z-10 shadow-sm transition-all duration-500">
-                        <span class="font-bold text-accent-gold text-xs md:text-lg">04</span>
-                    </div>
-                    <div class="content reveal-right">
-                        <h4 class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-3 font-bold">Farewell</h4>
-                        <h3 class="text-2xl md:text-4xl mb-4 italic leading-tight">Legacy of the Bay</h3>
-                        <p class="text-gray-500 body-font leading-relaxed text-sm md:text-lg">A slow breakfast at the resort and a final visit to a local weaving village for artisanal souvenirs before transfer to the airport for your flight home.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-24 md:py-32 bg-white">
+    <section id="pricing" class="py-24 md:py-32 bg-white scroll-mt-20">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-20 items-start">
                 <div class="reveal-left">
@@ -311,14 +305,14 @@
                                 <h4 class="font-bold text-xs tracking-widest uppercase mb-1">Shared Expedition</h4>
                                 <p class="text-[11px] text-gray-400">Join a group of 8 explorers</p>
                             </div>
-                            <span class="text-accent-gold font-bold text-xl">IDR 3.650K</span>
+                            <span class="text-accent-gold font-bold text-xl" data-cms="priceShared">IDR 3.650K</span>
                         </div>
                         <div class="p-8 border-2 border-accent-gold bg-accent-gold/5 flex justify-between items-center shadow-lg cursor-default">
                             <div>
                                 <h4 class="font-bold text-xs tracking-widest uppercase mb-1">Private Charter</h4>
                                 <p class="text-[11px] text-gray-400">Fully customized for your group</p>
                             </div>
-                            <span class="text-accent-gold font-bold text-xl">IDR 13.2M</span>
+                            <span class="text-accent-gold font-bold text-xl" data-cms="pricePrivate">IDR 13.2M</span>
                         </div>
                     </div>
                 </div>
@@ -349,6 +343,112 @@
         </div>
     </section>
 
+    <!-- Admin Panel Dashboard (CRUD Management) -->
+    <section id="admin-panel">
+        <div class="max-w-7xl mx-auto p-6 md:p-20">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+                <div>
+                    <h2 class="text-4xl md:text-5xl mb-6">Expedition OS</h2>
+                    <div class="flex gap-10">
+                        <span onclick="switchTab('leads')" id="tab-leads" class="admin-tab active text-[10px] font-bold uppercase tracking-widest">Inquiry Pipeline</span>
+                        <span onclick="switchTab('content')" id="tab-content" class="admin-tab text-[10px] font-bold uppercase tracking-widest">Site Controller</span>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <button onclick="openLeadModal()" class="px-8 py-4 bg-black text-white text-[10px] font-bold uppercase tracking-widest hover:bg-accent-gold transition-all">New Entry +</button>
+                    <button onclick="closeAdminPanel()" class="px-8 py-4 border border-gray-200 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-50">Exit Console</button>
+                </div>
+            </div>
+
+            <!-- Leads Tab (READ + DELETE + EDIT) -->
+            <div id="panel-leads">
+                <div class="bg-white border border-gray-100 shadow-sm overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-50 border-b border-gray-100">
+                            <tr>
+                                <th class="p-6 text-[10px] uppercase tracking-widest font-bold">Timestamp</th>
+                                <th class="p-6 text-[10px] uppercase tracking-widest font-bold">Explorer Name</th>
+                                <th class="p-6 text-[10px] uppercase tracking-widest font-bold">Plan</th>
+                                <th class="p-6 text-[10px] uppercase tracking-widest font-bold text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leads-table-body" class="divide-y divide-gray-100">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Content Editor Tab (UPDATE Live Content) -->
+            <div id="panel-content" class="hidden">
+                <div class="bg-white border border-gray-100 p-8 md:p-16 shadow-sm">
+                    <form id="cms-form" class="space-y-12">
+                        <div class="grid md:grid-cols-2 gap-16">
+                            <div class="space-y-8">
+                                <h4 class="text-xs font-bold uppercase tracking-widest text-accent-gold border-b border-gray-100 pb-3">Hero Messaging</h4>
+                                <div>
+                                    <label class="text-[9px] uppercase font-bold text-gray-400 block mb-3">Announcement Tagline</label>
+                                    <input type="text" name="heroTagline" class="w-full border-b p-3 text-sm focus:outline-none focus:border-black">
+                                </div>
+                                <div>
+                                    <label class="text-[9px] uppercase font-bold text-gray-400 block mb-3">Main Headline</label>
+                                    <input type="text" name="heroTitle" class="w-full border-b p-3 text-sm focus:outline-none focus:border-black">
+                                </div>
+                                <div>
+                                    <label class="text-[9px] uppercase font-bold text-gray-400 block mb-3">Hero Paragraph</label>
+                                    <textarea name="heroDesc" rows="3" class="w-full border-b p-3 text-sm focus:outline-none focus:border-black"></textarea>
+                                </div>
+                            </div>
+                            <div class="space-y-8">
+                                <h4 class="text-xs font-bold uppercase tracking-widest text-accent-gold border-b border-gray-100 pb-3">Rate Controller</h4>
+                                <div>
+                                    <label class="text-[9px] uppercase font-bold text-gray-400 block mb-3">Shared Seat Price</label>
+                                    <input type="text" name="priceShared" class="w-full border-b p-3 text-sm focus:outline-none focus:border-black">
+                                </div>
+                                <div>
+                                    <label class="text-[9px] uppercase font-bold text-gray-400 block mb-3">Private Charter Rate</label>
+                                    <input type="text" name="pricePrivate" class="w-full border-b p-3 text-sm focus:outline-none focus:border-black">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-10 border-t border-gray-100 flex justify-end">
+                            <button type="submit" id="save-cms-btn" class="bg-black text-white px-16 py-5 text-[10px] font-bold uppercase tracking-widest hover:bg-accent-gold transition-all">Publish Live Content</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Entry Modal (CREATE / UPDATE Individual Leads) -->
+    <div id="lead-modal" class="modal-overlay">
+        <div class="bg-white w-full max-w-xl p-12 shadow-2xl mx-4 relative">
+            <h3 id="modal-title" class="text-3xl mb-10 italic">Modify Entry</h3>
+            <form id="lead-form" class="space-y-8">
+                <input type="hidden" name="leadId" id="lead-id-input">
+                <div>
+                    <label class="text-[9px] uppercase font-bold text-gray-400 block mb-2">Explorer Full Name</label>
+                    <input type="text" name="name" required class="w-full border-b p-3 text-sm uppercase focus:outline-none focus:border-black">
+                </div>
+                <div>
+                    <label class="text-[9px] uppercase font-bold text-gray-400 block mb-2">Communication Channel (Email)</label>
+                    <input type="email" name="email" required class="w-full border-b p-3 text-sm focus:outline-none focus:border-black">
+                </div>
+                <div>
+                    <label class="text-[9px] uppercase font-bold text-gray-400 block mb-2">Requested Expedition</label>
+                    <select name="tripType" class="w-full border-b p-3 text-sm focus:outline-none focus:border-black bg-white">
+                        <option value="Shared Trip (Aug 1-4)">Shared Trip (Aug 1-4)</option>
+                        <option value="Private Charter">Private Charter</option>
+                    </select>
+                </div>
+                <div class="flex gap-4 pt-6">
+                    <button type="button" onclick="closeLeadModal()" class="flex-1 py-5 border border-gray-100 text-[10px] font-bold uppercase hover:bg-gray-50 transition-colors">Cancel</button>
+                    <button type="submit" class="flex-1 py-5 bg-black text-white text-[10px] font-bold uppercase tracking-widest hover:bg-accent-gold transition-all">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-[#03045e] text-white py-24 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 text-center">
@@ -360,7 +460,9 @@
                 <a href="#gallery" class="hover:text-white transition-colors">Visuals</a>
                 <a href="#pricing" class="hover:text-white transition-colors">Contact</a>
             </div>
-            <p class="text-[10px] text-white/20 tracking-[0.5em]">&copy; 2026 WHALESHARKTOUR.COM | SUMBAWA REGENCY, INDONESIA</p>
+            <p class="text-[10px] text-white/20 tracking-[0.5em]">
+                <span id="admin-trigger" class="cursor-pointer hover:text-white/40 transition-colors">&copy;</span> 2026 WHALESHARKTOUR.COM | SUMBAWA REGENCY, INDONESIA
+            </p>
         </div>
     </footer>
 
@@ -370,8 +472,9 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, setDoc, updateDoc, getDoc, query, onSnapshot, doc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        // Global Setup
         const firebaseConfig = JSON.parse(__firebase_config);
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         const app = initializeApp(firebaseConfig);
@@ -379,48 +482,188 @@
         const db = getFirestore(app);
 
         let currentUser = null;
+        let leadsCache = {};
 
+        // Authentication Lifecycle
         const initAuth = async () => {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                     await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (e) { console.error("Auth Failure", e); }
+                } else { await signInAnonymously(auth); }
+            } catch (e) { console.error("Auth Error", e); }
         };
         initAuth();
 
-        onAuthStateChanged(auth, u => { currentUser = u; });
+        onAuthStateChanged(auth, u => { 
+            currentUser = u; 
+            if (u) setupDataListeners();
+        });
 
-        const form = document.getElementById('expedition-form');
-        const submitBtn = document.getElementById('submit-btn');
+        // ----------------- CRUD LOGIC -----------------
 
-        form.onsubmit = async (e) => {
+        function setupDataListeners() {
+            // 1. Content Listener (CMS) - artifacts/{appId}/public/data/website_content
+            const contentRef = doc(db, 'artifacts', appId, 'public', 'data', 'website_content');
+            onSnapshot(contentRef, (snap) => {
+                if (snap.exists()) {
+                    const data = snap.data();
+                    Object.keys(data).forEach(key => {
+                        // Update UI
+                        const elements = document.querySelectorAll(`[data-cms="${key}"]`);
+                        elements.forEach(el => el.innerText = data[key]);
+                        // Update Admin Form
+                        const input = document.querySelector(`#cms-form [name="${key}"]`);
+                        if (input) input.value = data[key];
+                    });
+                }
+            }, (e) => console.error("CMS Sync Error", e));
+
+            // 2. Leads Listener (Pipeline) - artifacts/{appId}/public/data/bookings
+            const leadsRef = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
+            onSnapshot(query(leadsRef), (snap) => {
+                const tableBody = document.getElementById('leads-table-body');
+                let html = '';
+                leadsCache = {};
+                
+                const docs = snap.docs.map(d => ({id: d.id, ...d.data()}))
+                    .sort((a,b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
+
+                docs.forEach(lead => {
+                    leadsCache[lead.id] = lead;
+                    const date = lead.submittedAt ? new Date(lead.submittedAt.seconds * 1000).toLocaleString() : 'Processing';
+                    html += `
+                        <tr class="hover:bg-gray-50 transition-colors group">
+                            <td class="p-6 text-[9px] text-gray-400 font-bold uppercase tracking-widest">${date}</td>
+                            <td class="p-6">
+                                <div class="text-[11px] font-bold uppercase mb-1">${lead.name}</div>
+                                <div class="text-[10px] text-gray-500">${lead.email}</div>
+                            </td>
+                            <td class="p-6 text-[10px] uppercase font-bold text-accent-gold">${lead.tripType}</td>
+                            <td class="p-6 text-right space-x-6">
+                                <button onclick="window.editLead('${lead.id}')" class="text-black hover:text-accent-gold text-[9px] font-bold uppercase tracking-widest transition-colors">Modify</button>
+                                <button onclick="window.deleteLead('${lead.id}')" class="text-red-300 hover:text-red-600 text-[9px] font-bold uppercase tracking-widest transition-colors">Purge</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tableBody.innerHTML = html || '<tr><td colspan="4" class="p-20 text-center text-[10px] text-gray-300 uppercase tracking-[0.5em]">No Pipeline Records</td></tr>';
+            }, (e) => console.error("Pipeline Sync Error", e));
+        }
+
+        // Public Submission (CREATE)
+        const publicForm = document.getElementById('expedition-form');
+        publicForm.onsubmit = async (e) => {
             e.preventDefault();
             if (!currentUser) return;
-            
-            submitBtn.disabled = true;
-            submitBtn.innerText = "PROCESSING...";
-            
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.innerText = "TRANSMITTING...";
+
             try {
                 await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), {
-                    name: form.name.value,
-                    email: form.email.value,
-                    tripType: form.tripType.value,
+                    name: publicForm.name.value,
+                    email: publicForm.email.value,
+                    tripType: publicForm.tripType.value,
                     submittedAt: serverTimestamp(),
                     status: 'new'
                 });
-                
-                showToast('Expedition inquiry sent successfully');
-                form.reset();
-            } catch (err) { 
-                console.error(err);
-                showToast('Error sending inquiry. Try again.');
-            } finally { 
-                submitBtn.disabled = false; 
-                submitBtn.innerText = "SUBMIT INTEREST"; 
+                showToast('Inquiry Received');
+                publicForm.reset();
+            } catch (err) { showToast('Transmission Error'); }
+            finally { 
+                btn.disabled = false; 
+                btn.innerText = "SUBMIT INTEREST"; 
             }
+        };
+
+        // Lead Management (CREATE / UPDATE)
+        const leadForm = document.getElementById('lead-form');
+        leadForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('lead-id-input').value;
+            const data = {
+                name: leadForm.name.value,
+                email: leadForm.email.value,
+                tripType: leadForm.tripType.value,
+                updatedAt: serverTimestamp()
+            };
+
+            try {
+                if (id) {
+                    await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', id), data);
+                    showToast('Record Updated');
+                } else {
+                    data.submittedAt = serverTimestamp();
+                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), data);
+                    showToast('New Entry Logged');
+                }
+                closeLeadModal();
+            } catch (err) { showToast('Sync Failure'); }
+        };
+
+        // Lead Removal (DELETE)
+        window.deleteLead = async (id) => {
+            if (!confirm("Are you sure you want to permanently delete this explorer record?")) return;
+            try {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', id));
+                showToast('Record Purged');
+            } catch (err) { showToast('Delete Error'); }
+        };
+
+        // CMS Updates (UPDATE Live Text)
+        const cmsForm = document.getElementById('cms-form');
+        cmsForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('save-cms-btn');
+            btn.innerText = "PUBLISHING...";
+            const formData = new FormData(cmsForm);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'website_content'), data, { merge: true });
+                showToast('Live Content Updated');
+            } catch (err) { showToast('Publishing Error'); }
+            finally { btn.innerText = "PUBLISH LIVE CONTENT"; }
+        };
+
+        // ----------------- UI CONTROL -----------------
+
+        window.editLead = (id) => {
+            const lead = leadsCache[id];
+            if (!lead) return;
+            document.getElementById('modal-title').innerText = "Modify Explorer Entry";
+            document.getElementById('lead-id-input').value = id;
+            leadForm.name.value = lead.name;
+            leadForm.email.value = lead.email;
+            leadForm.tripType.value = lead.tripType;
+            document.getElementById('lead-modal').classList.add('active');
+        };
+
+        window.openLeadModal = () => {
+            document.getElementById('modal-title').innerText = "Log New Entry";
+            document.getElementById('lead-id-input').value = "";
+            leadForm.reset();
+            document.getElementById('lead-modal').classList.add('active');
+        };
+
+        window.closeLeadModal = () => document.getElementById('lead-modal').classList.remove('active');
+
+        window.switchTab = (tab) => {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(`tab-${tab}`).classList.add('active');
+            document.getElementById('panel-leads').classList.toggle('hidden', tab !== 'leads');
+            document.getElementById('panel-content').classList.toggle('hidden', tab !== 'content');
+        };
+
+        window.closeAdminPanel = () => {
+            document.getElementById('admin-panel').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+
+        document.getElementById('admin-trigger').ondblclick = () => {
+            document.getElementById('admin-panel').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            showToast('Console Access Granted');
         };
 
         function showToast(msg) {
@@ -431,20 +674,17 @@
         }
     </script>
 
-    <!-- Animation & UI Script -->
+    <!-- Animation & Interactions -->
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Hero Intro Sequence
             const tl = gsap.timeline();
             tl.fromTo("#hero-image", { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 2.5, ease: "power2.out" })
               .fromTo("#hero-tagline", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, "-=1.5")
               .fromTo("#hero-title", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: "power4.out" }, "-=1")
-              .fromTo("#hero-desc", { opacity: 0 }, { opacity: 1, duration: 1.5 }, "-=0.8")
-              .fromTo("#hero-btns", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, "-=1");
+              .fromTo("#hero-desc", { opacity: 0 }, { opacity: 1, duration: 1.5 }, "-=0.8");
 
-            // Navigation Scroll Effect
             ScrollTrigger.create({
                 start: "top -100",
                 onUpdate: (self) => {
@@ -454,77 +694,36 @@
                 }
             });
 
-            // Generic Reveal
             gsap.utils.toArray(".reveal-up").forEach(el => {
-                gsap.to(el, {
-                    opacity: 1, y: 0, duration: 1.2,
-                    scrollTrigger: { trigger: el, start: "top 85%" }
-                });
+                gsap.to(el, { opacity: 1, y: 0, duration: 1.2, scrollTrigger: { trigger: el, start: "top 85%" } });
             });
 
-            gsap.utils.toArray(".reveal-left").forEach(el => {
-                gsap.to(el, {
-                    opacity: 1, x: 0, duration: 1.2,
-                    scrollTrigger: { trigger: el, start: "top 85%" }
-                });
-            });
-
-            gsap.utils.toArray(".reveal-right").forEach(el => {
-                gsap.to(el, {
-                    opacity: 1, x: 0, duration: 1.2,
-                    scrollTrigger: { trigger: el, start: "top 85%" }
-                });
-            });
-
-            // Timeline Progress
             gsap.to("#timeline-progress", {
                 height: "100%", ease: "none",
-                scrollTrigger: { 
-                    trigger: ".timeline-container", 
-                    start: "top 30%", 
-                    end: "bottom 80%", 
-                    scrub: 0.5
-                }
+                scrollTrigger: { trigger: ".timeline-container", start: "top 30%", end: "bottom 80%", scrub: 0.5 }
             });
 
-            // Mobile Menu Toggle
             const toggle = document.getElementById('menu-toggle');
             const menu = document.getElementById('mobile-menu');
-            const links = document.querySelectorAll('.mobile-link');
-
-            const toggleMenu = () => {
+            toggle.onclick = () => {
                 const active = menu.classList.toggle('active');
                 toggle.querySelectorAll('span').forEach((s, i) => {
                     if (active) {
-                        toggle.style.color = 'black';
                         if (i === 0) s.style.transform = "rotate(45deg) translate(5px, 5px)";
                         if (i === 1) s.style.opacity = "0";
                         if (i === 2) s.style.transform = "rotate(-45deg) translate(5px, -5px)";
                     } else {
-                        toggle.style.color = 'inherit';
                         s.style.transform = "none";
                         s.style.opacity = "1";
                     }
                 });
             };
 
-            toggle.onclick = toggleMenu;
-            links.forEach(l => l.onclick = toggleMenu);
-
-            // Gallery Initialization
             new Swiper('.mainGallerySwiper', {
-                slidesPerView: 1.2,
-                spaceBetween: 20,
-                centeredSlides: true,
-                loop: true,
-                speed: 1000,
-                autoplay: { delay: 4000, disableOnInteraction: false },
+                slidesPerView: 1.2, spaceBetween: 20, centeredSlides: true, loop: true, speed: 1000,
                 pagination: { el: '.swiper-pagination', clickable: true },
                 navigation: { nextEl: '.swiper-button-next-custom', prevEl: '.swiper-button-prev-custom' },
-                breakpoints: {
-                    768: { slidesPerView: 2.2, spaceBetween: 40 },
-                    1024: { slidesPerView: 2.8, spaceBetween: 60 }
-                }
+                breakpoints: { 768: { slidesPerView: 2.2 }, 1024: { slidesPerView: 2.8 } }
             });
         });
     </script>
