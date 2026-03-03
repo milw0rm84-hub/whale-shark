@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sumbawa Expedition | whalesharktour.com</title>
     
     <!-- SEO & Open Graph Meta Tags -->
@@ -10,23 +10,10 @@
     <meta property="og:title" content="Sumbawa Whale Shark Encounter | whalesharktour.com">
     <meta property="og:description" content="Experience the magic of Saleh Bay. Snorkel with giants, explore Moyo Island waterfalls, and enjoy premium local hospitality.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&q=80&w=1200">
-    <meta property="og:url" content="https://whalesharktour.com/expedition-august">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Whale Shark Tour">
     
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Sumbawa Whale Shark Encounter">
-    <meta name="twitter:description" content="4-Day Seasonal Expedition in Saleh Bay, Sumbawa. Book your spot at whalesharktour.com.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&q=80&w=1200">
-
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- GSAP Core & Plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <!-- Swiper.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
@@ -39,251 +26,244 @@
             --sand: #f4f1de;
             --accent-gold: #c5a059;
         }
-        body { font-family: 'Montserrat', sans-serif; background-color: #fcfbf7; color: #1a1a1a; overflow-x: hidden; scroll-behavior: smooth; }
-        h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 0.15em; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #fcfbf7; 
+            color: #1a1a1a; 
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 0.1em; }
         .body-font { font-family: 'Lora', serif; }
         
+        /* Mobile Navigation Overlay */
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-100%);
+        }
+        #mobile-menu.active {
+            transform: translateY(0);
+        }
+
         /* Timeline Enhancements */
         .timeline-container::before {
             content: '';
             position: absolute;
-            left: 31px;
+            left: 20px;
             top: 0;
             bottom: 0;
             width: 2px;
             background: #e5e7eb;
         }
+        @media (min-width: 768px) {
+            .timeline-container::before { left: 31px; }
+        }
 
         #timeline-progress {
             position: absolute;
-            left: 31px;
+            left: 20px;
             top: 0;
             width: 2px;
             background: var(--accent-gold);
             height: 0;
             z-index: 2;
         }
+        @media (min-width: 768px) {
+            #timeline-progress { left: 31px; }
+        }
 
         .btn-reserve {
             background: var(--deep-navy);
             color: white;
             transition: all 0.3s ease;
-            letter-spacing: 0.2em;
-        }
-        .btn-reserve:hover {
-            background: var(--accent-gold);
-            transform: translateY(-2px);
-        }
-
-        /* Swiper Customization */
-        .swiper-pagination-bullet-active {
-            background: var(--accent-gold) !important;
+            letter-spacing: 0.15em;
         }
         
-        .swiper-button-next, .swiper-button-prev {
-            color: var(--accent-gold) !important;
-            transform: scale(0.7);
-        }
+        .swiper-pagination-bullet-active { background: var(--accent-gold) !important; }
 
         /* Animation States */
-        .reveal-up { opacity: 0; transform: translateY(50px); }
-        .reveal-left { opacity: 0; transform: translateX(-50px); }
-        .reveal-right { opacity: 0; transform: translateX(50px); }
+        .reveal-up { opacity: 0; transform: translateY(30px); }
+        .reveal-left { opacity: 0; transform: translateX(-30px); }
+        .reveal-right { opacity: 0; transform: translateX(30px); }
         
         .nav-scrolled {
-            padding-top: 0.75rem !important;
-            padding-bottom: 0.75rem !important;
             background-color: rgba(255, 255, 255, 0.98) !important;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
         }
 
-        /* Footer Specifics */
-        .footer-link {
-            position: relative;
-            transition: color 0.3s ease;
+        #toast {
+            visibility: hidden;
+            min-width: 280px;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 16px;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
-        .footer-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent-gold);
-            transition: width 0.3s ease;
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
         }
-        .footer-link:hover { color: var(--accent-gold); }
-        .footer-link:hover::after { width: 100%; }
-
-        .social-icon {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .social-icon:hover {
-            color: var(--accent-gold);
-            transform: translateY(-3px);
-        }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 20px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 20px; opacity: 1;} to {bottom: 0; opacity: 0;} }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased overflow-x-hidden">
 
     <!-- Top Navigation -->
-    <nav id="main-nav" class="fixed top-0 w-full z-50 bg-white/0 border-b border-transparent py-6 transition-all duration-500">
-        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <div class="font-bold tracking-widest text-xl nav-logo uppercase">WHALESHARK<span class="text-accent-gold font-light">TOUR</span></div>
-            <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-widest font-bold nav-links">
+    <nav id="main-nav" class="fixed top-0 w-full z-50 bg-white/0 py-4 md:py-6 transition-all duration-500 px-4 md:px-0">
+        <div class="max-w-7xl mx-auto px-2 md:px-6 flex justify-between items-center">
+            <div class="font-bold tracking-widest text-lg md:text-xl uppercase">WHALESHARK<span class="text-accent-gold font-light">TOUR</span></div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-widest font-bold">
                 <a href="#overview" class="hover:text-accent-gold transition-colors">Overview</a>
                 <a href="#itinerary" class="hover:text-accent-gold transition-colors">Itinerary</a>
                 <a href="#gallery" class="hover:text-accent-gold transition-colors">Gallery</a>
-                <a href="#pricing" class="hover:text-accent-gold transition-colors">Pricing</a>
-                <a href="#booking-form" class="text-accent-gold hover:opacity-70 transition-opacity">Book Trip</a>
+                <a href="#pricing" class="hover:text-accent-gold transition-colors text-accent-gold">Book Now</a>
             </div>
+
+            <!-- Mobile Burger -->
+            <button id="menu-toggle" class="md:hidden flex flex-col space-y-1.5 p-2 z-[60]">
+                <span class="w-6 h-0.5 bg-black transition-all duration-300"></span>
+                <span class="w-6 h-0.5 bg-black transition-all duration-300"></span>
+                <span class="w-6 h-0.5 bg-black transition-all duration-300"></span>
+            </button>
         </div>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[55] flex flex-col items-center justify-center space-y-8 md:hidden">
+        <a href="#overview" class="mobile-link text-xl uppercase tracking-widest">Overview</a>
+        <a href="#itinerary" class="mobile-link text-xl uppercase tracking-widest">Itinerary</a>
+        <a href="#gallery" class="mobile-link text-xl uppercase tracking-widest">Gallery</a>
+        <a href="#pricing" class="mobile-link text-xl uppercase tracking-widest text-accent-gold font-bold">Book Now</a>
+    </div>
+
     <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <section class="relative h-[90vh] md:h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img id="hero-image" src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover brightness-50 scale-110" alt="Saleh Bay">
+            <img id="hero-image" src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover brightness-50 md:scale-110" alt="Saleh Bay">
         </div>
         <div class="relative z-10 text-center text-white px-6">
-            <span id="hero-tagline" class="block uppercase tracking-[0.5em] text-xs mb-4 text-accent-gold opacity-0">Exclusive Seasonal Departure</span>
-            <h1 id="hero-title" class="text-5xl md:text-8xl mb-6 opacity-0">Saleh Bay <br> Encounter</h1>
-            <p id="hero-desc" class="text-lg md:text-xl body-font italic max-w-2xl mx-auto opacity-0">August 1st — August 4th | The peak of Whale Shark season in Sumbawa.</p>
-            <div id="hero-btns" class="mt-12 flex flex-col md:flex-row justify-center gap-6 opacity-0">
-                <a href="#itinerary" class="btn-reserve px-10 py-5 text-xs font-bold uppercase">View Itinerary</a>
-                <a href="#pricing" class="bg-white/10 backdrop-blur-md border border-white/30 px-10 py-5 text-xs font-bold uppercase hover:bg-white hover:text-black transition-all">Pricing Details</a>
+            <span id="hero-tagline" class="block uppercase tracking-[0.3em] md:tracking-[0.5em] text-[10px] md:text-xs mb-4 text-accent-gold opacity-0">Exclusive August Departure</span>
+            <h1 id="hero-title" class="text-4xl md:text-8xl mb-6 opacity-0 leading-tight">Saleh Bay <br class="hidden md:block"> Encounter</h1>
+            <p id="hero-desc" class="text-sm md:text-xl body-font italic max-w-2xl mx-auto opacity-0 px-4">August 1st — 4th | Experience the peak of the Whale Shark season.</p>
+            <div id="hero-btns" class="mt-8 md:mt-12 flex flex-col md:flex-row justify-center gap-4 md:gap-6 opacity-0">
+                <a href="#itinerary" class="btn-reserve px-8 md:px-10 py-4 md:py-5 text-[10px] font-bold uppercase">View Itinerary</a>
+                <a href="#pricing" class="bg-white/10 backdrop-blur-md border border-white/20 px-8 md:px-10 py-4 md:py-5 text-[10px] font-bold uppercase hover:bg-white hover:text-black transition-all">Pricing Details</a>
             </div>
-        </div>
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 animate-bounce cursor-pointer">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
         </div>
     </section>
 
     <!-- Swiper Gallery Section -->
-    <section id="gallery" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6 mb-12 flex flex-col md:flex-row justify-between items-end">
+    <section id="gallery" class="py-16 md:py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mb-12 flex flex-col md:flex-row justify-between items-center md:items-end text-center md:text-left">
             <div class="reveal-left">
-                <h2 class="text-4xl mb-2">Visual Diary</h2>
-                <p class="text-accent-gold tracking-widest uppercase text-[10px] font-bold">Captured in Saleh Bay</p>
+                <h2 class="text-3xl md:text-4xl mb-2">Visual Diary</h2>
+                <p class="text-accent-gold tracking-widest uppercase text-[10px] font-bold">Saleh Bay Expeditions</p>
             </div>
-            <div class="hidden md:flex space-x-4 mb-2 reveal-right">
-                <div class="swiper-button-prev-custom cursor-pointer text-accent-gold">← Previous</div>
-                <div class="swiper-button-next-custom cursor-pointer text-accent-gold">Next →</div>
+            <div class="hidden md:flex space-x-6 mb-2 reveal-right font-bold text-[10px] tracking-widest">
+                <button class="swiper-button-prev-custom hover:text-accent-gold">← PREV</button>
+                <button class="swiper-button-next-custom hover:text-accent-gold">NEXT →</button>
             </div>
         </div>
         
-        <div class="swiper mainGallerySwiper reveal-up">
+        <div class="swiper mainGallerySwiper reveal-up px-4 md:px-0">
             <div class="swiper-wrapper">
-                <div class="swiper-slide px-2">
-                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=1200" class="w-full h-[500px] object-cover rounded-sm shadow-lg" alt="Whale Shark">
-                    <p class="mt-4 italic text-sm text-gray-400 text-center body-font">Encounters at the Bagan platforms.</p>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=1200" class="w-full h-[350px] md:h-[500px] object-cover rounded-sm shadow-sm" alt="Whale Shark">
                 </div>
-                <div class="swiper-slide px-2">
-                    <img src="https://images.unsplash.com/photo-1582967788606-a171c1080cb0?auto=format&fit=crop&q=80&w=1200" class="w-full h-[500px] object-cover rounded-sm shadow-lg" alt="Turquoise Water">
-                    <p class="mt-4 italic text-sm text-gray-400 text-center body-font">Pristine visibility in the Outer Reef.</p>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1582967788606-a171c1080cb0?auto=format&fit=crop&q=80&w=1200" class="w-full h-[350px] md:h-[500px] object-cover rounded-sm shadow-sm" alt="Turquoise Water">
                 </div>
-                <div class="swiper-slide px-2">
-                    <img src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?auto=format&fit=crop&q=80&w=1200" class="w-full h-[500px] object-cover rounded-sm shadow-lg" alt="Sumbawa Coast">
-                    <p class="mt-4 italic text-sm text-gray-400 text-center body-font">Sumbawa's untouched coastline at dusk.</p>
-                </div>
-                <div class="swiper-slide px-2">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=1200" class="w-full h-[500px] object-cover rounded-sm shadow-lg" alt="Moyo Island">
-                    <p class="mt-4 italic text-sm text-gray-400 text-center body-font">The crystal waterfalls of Moyo Island.</p>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?auto=format&fit=crop&q=80&w=1200" class="w-full h-[350px] md:h-[500px] object-cover rounded-sm shadow-sm" alt="Sumbawa Coast">
                 </div>
             </div>
-            <div class="swiper-pagination mt-10 !static"></div>
+            <div class="swiper-pagination mt-8 !static"></div>
         </div>
     </section>
 
     <!-- Core Highlights -->
-    <section id="overview" class="py-32 bg-[#fcfbf7]">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-16 text-center">
-            <div class="highlight-card reveal-up">
-                <div class="text-4xl mb-6 text-accent-gold">🐋</div>
-                <h3 class="font-bold mb-3">Guaranteed Sighting</h3>
-                <p class="text-sm text-gray-500 body-font leading-relaxed">We coordinate directly with local "Bagan" fishermen to locate the giants before sunrise.</p>
+    <section id="overview" class="py-20 md:py-32 bg-[#fcfbf7]">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 text-center">
+            <div class="reveal-up">
+                <div class="text-3xl md:text-4xl mb-4 md:mb-6 text-accent-gold">🐋</div>
+                <h3 class="font-bold mb-3 text-sm md:text-base">Guaranteed Sighting</h3>
+                <p class="text-[12px] md:text-sm text-gray-500 body-font leading-relaxed">Early morning coordinates with local bagan platforms ensure unique encounters.</p>
             </div>
-            <div class="highlight-card reveal-up">
-                <div class="text-4xl mb-6 text-accent-gold">🛶</div>
-                <h3 class="font-bold mb-3">Private Traditional Boat</h3>
-                <p class="text-sm text-gray-500 body-font leading-relaxed">Customized wooden vessels designed for small groups to ensure intimacy and safety.</p>
+            <div class="reveal-up">
+                <div class="text-3xl md:text-4xl mb-4 md:mb-6 text-accent-gold">🛶</div>
+                <h3 class="font-bold mb-3 text-sm md:text-base">Small Group Intimacy</h3>
+                <p class="text-[12px] md:text-sm text-gray-500 body-font leading-relaxed">Limited to 8 explorers per departure to minimize environmental impact.</p>
             </div>
-            <div class="highlight-card reveal-up">
-                <div class="text-4xl mb-6 text-accent-gold">📸</div>
-                <h3 class="font-bold mb-3">Full Documentation</h3>
-                <p class="text-sm text-gray-500 body-font leading-relaxed">High-quality GoPro Hero 12 footage and drone shots (weather permitting) included.</p>
+            <div class="reveal-up">
+                <div class="text-3xl md:text-4xl mb-4 md:mb-6 text-accent-gold">📸</div>
+                <h3 class="font-bold mb-3 text-sm md:text-base">Documented Journey</h3>
+                <p class="text-[12px] md:text-sm text-gray-500 body-font leading-relaxed">Full 4K drone and underwater footage included for every guest.</p>
             </div>
         </div>
     </section>
 
     <!-- Itinerary -->
-    <section id="itinerary" class="py-32 bg-[#f9f8f4]">
+    <section id="itinerary" class="py-20 md:py-32 bg-[#f9f8f4]">
         <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-24 reveal-up">
-                <h2 class="text-4xl md:text-6xl mb-6">The Journey</h2>
-                <p class="text-accent-gold tracking-[0.4em] uppercase text-xs font-bold">4 Days / 3 Nights Expedition</p>
+            <div class="text-center mb-16 md:mb-24 reveal-up">
+                <h2 class="text-3xl md:text-6xl mb-4 md:mb-6">The Journey</h2>
+                <p class="text-accent-gold tracking-[0.2em] md:tracking-[0.4em] uppercase text-[10px] font-bold">4 Days / 3 Nights Expedition</p>
             </div>
 
             <div class="relative timeline-container">
                 <div id="timeline-progress"></div>
                 
                 <!-- Day 1 -->
-                <div class="relative pl-24 mb-24 timeline-item">
-                    <div class="dot absolute left-0 top-0 w-16 h-16 bg-white border border-gray-100 flex items-center justify-center rounded-full z-10 shadow-sm transition-transform duration-500">
-                        <span class="font-bold text-accent-gold">01</span>
+                <div class="relative pl-12 md:pl-24 mb-16 md:mb-24 timeline-item">
+                    <div class="dot absolute left-0 top-0 w-10 h-10 md:w-16 md:h-16 bg-white border border-gray-100 flex items-center justify-center rounded-full z-10 shadow-sm transition-transform duration-500">
+                        <span class="font-bold text-accent-gold text-xs md:text-base">01</span>
                     </div>
                     <div class="content reveal-right">
-                        <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-2">Arrival & Transit</h4>
-                        <h3 class="text-3xl mb-4 italic">Arrival in Sumbawa Besar</h3>
-                        <p class="text-gray-600 body-font leading-relaxed text-lg">
-                            Pick up from Sultan Muhammad Kaharuddin Airport. Transfer to your premium hotel in Sumbawa Besar. Evening briefing over a traditional local dinner at the rooftop bar.
+                        <h4 class="text-[9px] uppercase tracking-widest text-gray-400 mb-2">Day 1: Arrival</h4>
+                        <h3 class="text-xl md:text-3xl mb-3 md:mb-4 italic">Sumbawa Gateway</h3>
+                        <p class="text-gray-600 body-font leading-relaxed text-sm md:text-lg">
+                            Airport pickup and check-in to your resort. Sunset briefing at the harbor with local seafood.
                         </p>
                     </div>
                 </div>
 
                 <!-- Day 2 -->
-                <div class="relative pl-24 mb-24 timeline-item">
-                    <div class="dot absolute left-0 top-0 w-16 h-16 bg-white border border-gray-100 flex items-center justify-center rounded-full z-10 shadow-sm transition-transform duration-500">
-                        <span class="font-bold text-accent-gold">02</span>
+                <div class="relative pl-12 md:pl-24 mb-16 md:mb-24 timeline-item">
+                    <div class="dot absolute left-0 top-0 w-10 h-10 md:w-16 md:h-16 bg-white border border-gray-100 flex items-center justify-center rounded-full z-10 shadow-sm transition-transform duration-500">
+                        <span class="font-bold text-accent-gold text-xs md:text-base">02</span>
                     </div>
                     <div class="content reveal-right">
-                        <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-2">The Encounter</h4>
-                        <h3 class="text-3xl mb-4 italic">Saleh Bay Sunrise</h3>
-                        <p class="text-gray-600 body-font leading-relaxed text-lg mb-6">
-                            02:30 AM departure to Labuan Jambu. Boarding our traditional boat to reach the Bagan platforms by dawn.
+                        <h4 class="text-[9px] uppercase tracking-widest text-gray-400 mb-2">Day 2: The Core</h4>
+                        <h3 class="text-xl md:text-3xl mb-3 md:mb-4 italic">Giants of the Bay</h3>
+                        <p class="text-gray-600 body-font leading-relaxed text-sm md:text-lg">
+                            Pre-dawn departure to Saleh Bay. Several hours of interaction with whale sharks at the Bagan platforms.
                         </p>
-                        <ul class="text-md text-gray-500 space-y-3 body-font italic border-l-2 border-accent-gold/20 pl-6">
-                            <li>• 3-4 hours of snorkeling with Whale Sharks</li>
-                            <li>• Breakfast served on the Bagan platform</li>
-                            <li>• Afternoon visit to the mangrove conservation area</li>
-                        </ul>
                     </div>
                 </div>
 
                 <!-- Day 3 -->
-                <div class="relative pl-24 mb-24 timeline-item">
-                    <div class="dot absolute left-0 top-0 w-16 h-16 bg-white border border-gray-100 flex items-center justify-center rounded-full z-10 shadow-sm transition-transform duration-500">
-                        <span class="font-bold text-accent-gold">03</span>
+                <div class="relative pl-12 md:pl-24 mb-16 md:mb-24 timeline-item">
+                    <div class="dot absolute left-0 top-0 w-10 h-10 md:w-16 md:h-16 bg-white border border-gray-100 flex items-center justify-center rounded-full z-10 shadow-sm transition-transform duration-500">
+                        <span class="font-bold text-accent-gold text-xs md:text-base">03</span>
                     </div>
                     <div class="content reveal-right">
-                        <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-2">Island Exploration</h4>
-                        <h3 class="text-3xl mb-4 italic">Moyo Island Hidden Waterfalls</h3>
-                        <p class="text-gray-600 body-font leading-relaxed text-lg">
-                            Cruise to the legendary Moyo Island. Trek through the tropical forest to reach Mata Jitu Waterfall, once visited by Lady Diana. Snorkeling at Takat Segele on the return leg.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Day 4 -->
-                <div class="relative pl-24 timeline-item">
-                    <div class="dot absolute left-0 top-0 w-16 h-16 bg-white border border-gray-100 flex items-center justify-center rounded-full z-10 shadow-sm transition-transform duration-500">
-                        <span class="font-bold text-accent-gold">04</span>
-                    </div>
-                    <div class="content reveal-right">
-                        <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-2">Departure</h4>
-                        <h3 class="text-3xl mb-4 italic">Farewell & Transfer</h3>
-                        <p class="text-gray-600 body-font leading-relaxed text-lg">
-                            Morning at leisure for souvenir shopping in Sumbawa Besar. Final airport transfer for your flight back to Bali or Lombok.
+                        <h4 class="text-[9px] uppercase tracking-widest text-gray-400 mb-2">Day 3: Nature</h4>
+                        <h3 class="text-xl md:text-3xl mb-3 md:mb-4 italic">Moyo Island Falls</h3>
+                        <p class="text-gray-600 body-font leading-relaxed text-sm md:text-lg">
+                            Forest trek to the turquoise Mata Jitu waterfalls. Snorkeling in the coral gardens of Moyo.
                         </p>
                     </div>
                 </div>
@@ -292,286 +272,188 @@
     </section>
 
     <!-- Pricing & Inclusions -->
-    <section id="pricing" class="py-32 bg-white overflow-hidden">
+    <section id="pricing" class="py-20 md:py-32 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
+            <div class="grid lg:grid-cols-2 gap-12 md:gap-20 items-start">
                 <div class="reveal-left">
-                    <h2 class="text-4xl md:text-5xl mb-8 leading-tight">Investment in <br> Lifelong Memories</h2>
-                    <p class="body-font italic text-gray-500 text-lg mb-10">This seasonal expedition is priced to include full logistics, ensuring you focus only on the experience.</p>
+                    <h2 class="text-3xl md:text-5xl mb-6 md:mb-8 leading-tight">Securing Your Expedition</h2>
+                    <p class="body-font italic text-gray-500 text-sm md:text-lg mb-8 md:mb-12">Inclusive of all logistics, permits, and documentation for the August season.</p>
                     
-                    <div class="space-y-6 mb-12">
-                        <div class="pricing-card flex justify-between items-center p-8 border border-gray-100 bg-gray-50 rounded-sm">
-                            <span class="font-bold text-lg">Shared Trip (Max 8)</span>
-                            <span class="text-accent-gold font-bold text-xl">IDR 3.650.000 <span class="text-[10px] text-gray-400 font-normal">/ PAX</span></span>
+                    <div class="space-y-4 md:space-y-6 mb-12">
+                        <div class="pricing-card flex justify-between items-center p-6 md:p-8 border border-gray-100 bg-gray-50 rounded-sm">
+                            <span class="font-bold text-sm md:text-lg uppercase tracking-widest">Shared Trip</span>
+                            <span class="text-accent-gold font-bold text-base md:text-xl">IDR 3.650K<span class="text-[10px] text-gray-400 font-normal ml-1">/ PAX</span></span>
                         </div>
-                        <div class="pricing-card flex justify-between items-center p-8 border-2 border-accent-gold bg-accent-gold/5 rounded-sm relative">
-                            <div class="absolute -top-3 left-8 bg-accent-gold text-white text-[9px] px-3 py-1 font-bold uppercase tracking-widest">Recommended</div>
-                            <div>
-                                <span class="font-bold block text-lg">Private Charter</span>
-                                <span class="text-[10px] text-gray-400 uppercase tracking-widest">Up to 4 Guests</span>
-                            </div>
-                            <span class="text-accent-gold font-bold text-xl">IDR 13.200.000</span>
+                        <div class="pricing-card flex justify-between items-center p-6 md:p-8 border-2 border-accent-gold bg-accent-gold/5 rounded-sm relative">
+                            <div class="absolute -top-3 left-6 md:left-8 bg-accent-gold text-white text-[8px] px-2 py-1 font-bold uppercase tracking-widest">Premium</div>
+                            <span class="font-bold text-sm md:text-lg uppercase tracking-widest">Private</span>
+                            <span class="text-accent-gold font-bold text-base md:text-xl">IDR 13.2M</span>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-y-6 text-xs uppercase tracking-widest font-bold text-gray-400">
-                        <div class="flex items-center inclusion-item"><span class="text-accent-gold mr-3">✦</span> All Meals</div>
-                        <div class="flex items-center inclusion-item"><span class="text-accent-gold mr-3">✦</span> Hotel Stays</div>
-                        <div class="flex items-center inclusion-item"><span class="text-accent-gold mr-3">✦</span> Go Pro Docs</div>
-                        <div class="flex items-center inclusion-item"><span class="text-accent-gold mr-3">✦</span> Gear Rental</div>
-                        <div class="flex items-center inclusion-item"><span class="text-accent-gold mr-3">✦</span> Port Fees</div>
-                        <div class="flex items-center inclusion-item"><span class="text-accent-gold mr-3">✦</span> English Guide</div>
+                    <div class="grid grid-cols-2 gap-y-4 text-[10px] uppercase tracking-widest font-bold text-gray-400">
+                        <div class="flex items-center"><span class="text-accent-gold mr-2">✦</span> Full Board</div>
+                        <div class="flex items-center"><span class="text-accent-gold mr-2">✦</span> Eco Permits</div>
+                        <div class="flex items-center"><span class="text-accent-gold mr-2">✦</span> Drone Docs</div>
+                        <div class="flex items-center"><span class="text-accent-gold mr-2">✦</span> Boutique Hotel</div>
                     </div>
                 </div>
 
-                <!-- Updated ID for anchor link -->
-                <div id="booking-form" class="bg-slate-900 p-12 md:p-16 rounded-sm text-white reveal-right scroll-mt-32">
-                    <h3 class="text-3xl mb-8 italic">Reserve Your Spot</h3>
-                    <p class="text-sm opacity-60 mb-10 body-font leading-relaxed">A 30% deposit is required to secure your cabin for the August departure. Our concierge will contact you within 24 hours.</p>
-                    
-                    <form class="space-y-6">
-                        <div class="group">
-                            <input type="text" placeholder="FULL NAME" class="w-full bg-transparent border-b border-white/20 pb-4 text-[10px] tracking-widest focus:outline-none focus:border-accent-gold transition-colors uppercase">
+                <!-- Booking Form -->
+                <div id="booking-form" class="bg-slate-900 p-8 md:p-16 rounded-sm text-white reveal-right scroll-mt-24">
+                    <h3 class="text-2xl md:text-3xl mb-6 md:mb-8 italic">Reserve Slot</h3>
+                    <form id="expedition-form" class="space-y-6 md:space-y-8">
+                        <div>
+                            <input type="text" id="name" name="name" required placeholder="YOUR NAME" class="w-full bg-transparent border-b border-white/20 pb-4 text-[10px] tracking-widest focus:outline-none focus:border-accent-gold transition-colors uppercase">
                         </div>
-                        <div class="group">
-                            <input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-transparent border-b border-white/20 pb-4 text-[10px] tracking-widest focus:outline-none focus:border-accent-gold transition-colors uppercase">
+                        <div>
+                            <input type="email" id="email" name="email" required placeholder="EMAIL" class="w-full bg-transparent border-b border-white/20 pb-4 text-[10px] tracking-widest focus:outline-none focus:border-accent-gold transition-colors uppercase">
                         </div>
-                        <div class="group">
-                            <select class="w-full bg-transparent border-b border-white/20 pb-4 text-[10px] tracking-widest focus:outline-none focus:border-accent-gold transition-colors uppercase">
-                                <option class="bg-slate-900">SHARED TRIP (AUG 1-4)</option>
-                                <option class="bg-slate-900">PRIVATE CHARTER</option>
+                        <div>
+                            <select id="tripType" name="tripType" class="w-full bg-transparent border-b border-white/20 pb-4 text-[10px] tracking-widest focus:outline-none focus:border-accent-gold transition-colors uppercase cursor-pointer">
+                                <option class="bg-slate-900" value="Shared Trip (Aug 1-4)">SHARED TRIP (AUG 1-4)</option>
+                                <option class="bg-slate-900" value="Private Charter">PRIVATE CHARTER</option>
                             </select>
                         </div>
-                        <button type="submit" class="w-full btn-reserve py-6 mt-10 text-[11px] font-bold">SEND INQUIRY</button>
+                        <button type="submit" id="submit-btn" class="w-full btn-reserve py-5 md:py-6 mt-4 text-[10px] font-bold disabled:opacity-50">SEND INQUIRY</button>
                     </form>
-                    <div class="mt-12 flex justify-center items-center space-x-4 opacity-40">
-                        <div class="h-px w-8 bg-white"></div>
-                        <p class="text-[9px] tracking-[0.3em] uppercase">WhatsApp: +62 812 3456 7890</p>
-                        <div class="h-px w-8 bg-white"></div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Updated Elegant Footer -->
-    <footer class="bg-[#03045e] text-white pt-24 pb-12 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-                <!-- Branding & Philosophy -->
-                <div class="lg:col-span-1">
-                    <div class="font-bold tracking-[0.4em] text-xl mb-8 uppercase">WHALESHARK<span class="text-accent-gold font-light">TOUR</span></div>
-                    <p class="text-sm text-gray-400 body-font leading-relaxed mb-8 italic">
-                        Dedicated to creating profound connections between humans and the ocean's gentle giants through sustainable, small-scale expeditions.
-                    </p>
-                    <div class="flex space-x-5 items-center">
-                        <a href="#" class="social-icon" aria-label="Instagram">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm9 5a1 1 0 100 2 1 1 0 000-2zm-4 3a4 4 0 100 8 4 4 0 000-8z"/></svg>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="Facebook">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z"/></svg>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="Youtube">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33 2.78 2.78 0 001.94 2C5.12 19.5 12 19.5 12 19.5s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.33 2.78 2.78 0 00-.46-5.33zM9.75 15.02V8.48L15.5 11.75l-5.75 3.27z"/></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Explore Links -->
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-[0.3em] mb-8 text-accent-gold">Explore</h4>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        <li><a href="#overview" class="footer-link">Overview</a></li>
-                        <li><a href="#itinerary" class="footer-link">The Journey</a></li>
-                        <li><a href="#gallery" class="footer-link">Visual Diary</a></li>
-                        <li><a href="#pricing" class="footer-link">Pricing & Gear</a></li>
-                        <li><a href="#booking-form" class="footer-link">Book Now</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact & Location -->
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-[0.3em] mb-8 text-accent-gold">Contact</h4>
-                    <ul class="space-y-4 text-sm text-gray-300 body-font italic">
-                        <li>Office: Labuan Jambu, Sumbawa</li>
-                        <li>General: hello@whalesharktour.com</li>
-                        <li>Support: +62 812 3456 7890</li>
-                        <li class="pt-4 not-italic text-xs tracking-widest text-gray-500 uppercase">Operating Hours:</li>
-                        <li class="not-italic">MON — SAT | 09:00 — 18:00</li>
-                    </ul>
-                </div>
-
-                <!-- Newsletter -->
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-[0.3em] mb-8 text-accent-gold">Season Alerts</h4>
-                    <p class="text-xs text-gray-400 mb-6 leading-relaxed">Join our mailing list to receive notifications when new seasonal slots open for 2027.</p>
-                    <div class="relative">
-                        <input type="email" placeholder="Email Address" class="w-full bg-white/5 border border-white/10 px-4 py-4 text-xs focus:outline-none focus:border-accent-gold transition-all">
-                        <button class="absolute right-4 top-1/2 -translate-y-1/2 text-accent-gold hover:text-white transition-colors">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </button>
-                    </div>
-                </div>
+    <!-- Simple Footer -->
+    <footer class="bg-[#03045e] text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="font-bold tracking-widest text-lg mb-8 uppercase">WHALESHARK<span class="text-accent-gold font-light">TOUR</span></div>
+            <div class="flex flex-wrap justify-center gap-8 text-[10px] tracking-widest uppercase text-gray-400 mb-12 font-bold">
+                <a href="#overview">Overview</a>
+                <a href="#itinerary">Journey</a>
+                <a href="#gallery">Visuals</a>
+                <a href="#pricing">Booking</a>
             </div>
-
-            <!-- Bottom Bar -->
-            <div class="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-[10px] tracking-[0.2em] uppercase text-gray-500">
-                <div>&copy; 2026 WHALESHARKTOUR.COM | ALL RIGHTS RESERVED</div>
-                <div class="flex space-x-8">
-                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-                </div>
-            </div>
+            <p class="text-[10px] text-gray-500 tracking-[0.2em]">&copy; 2026 WHALESHARKTOUR.COM | EXCLUSIVE SUMBAWA EXPEDITIONS</p>
         </div>
     </footer>
+
+    <div id="toast">INQUIRY SENT SUCCESSFULLY</div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let user = null;
+        onAuthStateChanged(auth, u => { user = u; });
+
+        (async () => {
+            if (typeof __initial_auth_token !== 'undefined') await signInWithCustomToken(auth, __initial_auth_token);
+            else await signInAnonymously(auth);
+        })();
+
+        const form = document.getElementById('expedition-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const toast = document.getElementById('toast');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!user) return;
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "SENDING...";
+
+            try {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), {
+                    name: form.name.value,
+                    email: form.email.value,
+                    tripType: form.tripType.value,
+                    submittedAt: serverTimestamp(),
+                    status: 'new'
+                });
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
+                form.reset();
+            } catch (err) {
+                console.error(err);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "SEND INQUIRY";
+            }
+        });
+    </script>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        window.addEventListener('load', () => {
-            // 1. Initial Hero Animation
-            const heroTl = gsap.timeline();
-            heroTl.to("#hero-tagline", { opacity: 1, y: 0, duration: 1, ease: "power3.out" })
-                  .to("#hero-title", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" }, "-=0.6")
-                  .to("#hero-desc", { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, "-=0.8")
-                  .to("#hero-btns", { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, "-=0.8")
-                  .from(".nav-logo", { x: -30, opacity: 0, duration: 1 }, "-=1.5")
-                  .from(".nav-links", { x: 30, opacity: 0, duration: 1 }, "-=1.5");
+        // Mobile Menu Logic
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const menuSpans = menuToggle.querySelectorAll('span');
 
-            // 2. Parallax Hero Image
-            gsap.to("#hero-image", {
-                yPercent: 30,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "header",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
-                }
+        menuToggle.addEventListener('click', () => {
+            const isActive = mobileMenu.classList.toggle('active');
+            if(isActive) {
+                menuSpans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+                menuSpans[1].style.opacity = "0";
+                menuSpans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
+            } else {
+                menuSpans[0].style.transform = "none";
+                menuSpans[1].style.opacity = "1";
+                menuSpans[2].style.transform = "none";
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuSpans[0].style.transform = "none";
+                menuSpans[1].style.opacity = "1";
+                menuSpans[2].style.transform = "none";
             });
+        });
 
-            // 3. Navigation Scroll Effect
+        window.addEventListener('load', () => {
+            // GSAP Animations
+            const heroTl = gsap.timeline();
+            heroTl.to("#hero-tagline", { opacity: 1, y: 0, duration: 1 })
+                  .to("#hero-title", { opacity: 1, y: 0, duration: 1 }, "-=0.6")
+                  .to("#hero-desc", { opacity: 1, y: 0, duration: 1 }, "-=0.8")
+                  .to("#hero-btns", { opacity: 1, y: 0, duration: 1 }, "-=0.8");
+
             ScrollTrigger.create({
                 start: "top -50",
                 onUpdate: (self) => {
                     const nav = document.getElementById('main-nav');
-                    if (self.direction === 1) { // Scrolling down
-                        nav.classList.add('nav-scrolled');
-                    } else { // Scrolling up
-                        if (window.scrollY < 50) nav.classList.remove('nav-scrolled');
-                    }
+                    if (self.direction === 1) nav.classList.add('nav-scrolled');
+                    else if (window.scrollY < 50) nav.classList.remove('nav-scrolled');
                 }
             });
 
-            // 4. Staggered Entrance for Highlights
             gsap.to(".reveal-up", {
-                opacity: 1,
-                y: 0,
-                duration: 1.2,
-                stagger: 0.2,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: "#overview",
-                    start: "top 80%"
-                }
+                opacity: 1, y: 0, duration: 1, stagger: 0.15,
+                scrollTrigger: { trigger: "#overview", start: "top 85%" }
             });
 
-            // 5. Timeline Progress Bar
             gsap.to("#timeline-progress", {
-                height: "100%",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: ".timeline-container",
-                    start: "top 50%",
-                    end: "bottom 50%",
-                    scrub: true
-                }
+                height: "100%", ease: "none",
+                scrollTrigger: { trigger: ".timeline-container", start: "top 50%", end: "bottom 50%", scrub: true }
             });
 
-            // 6. Timeline Dots Scaling
-            gsap.utils.toArray(".timeline-item").forEach(item => {
-                const dot = item.querySelector(".dot");
-                const content = item.querySelector(".content");
-                
-                gsap.from(content, {
-                    opacity: 0,
-                    x: 50,
-                    duration: 1,
-                    scrollTrigger: {
-                        trigger: item,
-                        start: "top 70%"
-                    }
-                });
+            gsap.to(".reveal-left", { opacity: 1, x: 0, duration: 1, scrollTrigger: { trigger: "#pricing", start: "top 80%" } });
+            gsap.to(".reveal-right", { opacity: 1, x: 0, duration: 1, scrollTrigger: { trigger: "#pricing", start: "top 80%" } });
 
-                ScrollTrigger.create({
-                    trigger: item,
-                    start: "top 50%",
-                    end: "bottom 50%",
-                    onToggle: self => {
-                        if (self.isActive) {
-                            dot.style.transform = "scale(1.2)";
-                            dot.style.borderColor = "var(--accent-gold)";
-                        } else {
-                            dot.style.transform = "scale(1)";
-                            dot.style.borderColor = "#e5e7eb";
-                        }
-                    }
-                });
-            });
-
-            // 7. Pricing Section Reveal
-            gsap.to(".reveal-left", {
-                opacity: 1,
-                x: 0,
-                duration: 1.5,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: "#pricing",
-                    start: "top 70%"
-                }
-            });
-
-            gsap.to(".reveal-right", {
-                opacity: 1,
-                x: 0,
-                duration: 1.5,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: "#pricing",
-                    start: "top 70%"
-                }
-            });
-
-            // 8. Staggered Pricing Cards
-            gsap.from(".pricing-card", {
-                opacity: 0,
-                y: 30,
-                stagger: 0.2,
-                duration: 1,
-                scrollTrigger: {
-                    trigger: "#pricing",
-                    start: "top 60%"
-                }
-            });
-
-            // 9. Initialize Swiper
-            const swiper = new Swiper('.mainGallerySwiper', {
-                slidesPerView: 1,
-                spaceBetween: 10,
-                centeredSlides: true,
-                loop: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next-custom',
-                    prevEl: '.swiper-button-prev-custom',
-                },
-                breakpoints: {
-                    640: { slidesPerView: 1.5 },
-                    1024: { slidesPerView: 2.5, spaceBetween: 30 }
-                }
+            new Swiper('.mainGallerySwiper', {
+                slidesPerView: 1.1, spaceBetween: 15, centeredSlides: true, loop: true,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next-custom', prevEl: '.swiper-button-prev-custom' },
+                breakpoints: { 768: { slidesPerView: 2.5, spaceBetween: 30 } }
             });
         });
     </script>
